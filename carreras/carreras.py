@@ -4,14 +4,14 @@ import random  # Se necesita para obtener la distancia aleatoria a avanzar
 import os
 
 participantes = ["Moto_de_agua","Monorriel"]  # Lista de los participantes de la carrera
-distancia_de_meta = 0  # Tamaño de la pista de carreras en metros
+distancia_de_meta = 10  # Tamaño de la pista de carreras en metros
 
 
 class Vehiculo:
-    tam_tanque = 0  # Tamaño del tanque de gasolina
-    min_distancia = 0  # Cantidad máxima de metros que puede avanzar un carro en una iteración
-    max_distancia = 0  # Cantidad mínima de metros que puede avanzar un carro en una iteración
-    distancia_recorrida = 0  # Distancia recorrida por el vehículo
+    tam_tanque = 2  # Tamaño del tanque de gasolina
+    min_distancia = 2  # Cantidad máxima de metros que puede avanzar un carro en una iteración
+    max_distancia = 2  # Cantidad mínima de metros que puede avanzar un carro en una iteración
+    distancia_recorrida = 2  # Distancia recorrida por el vehículo
 
     def __init__(self):
         """Inicializa la clase padre del vehículo"""
@@ -34,7 +34,7 @@ def imprime_carrera():
     for x in range(len(participantes)):  # Itera sobre los vehículos
         vehiculo = participantes[x]
         pista = "-" * len_pista
-        posicion = (vehiculo.distancia_recorrida * len_pista) // distancia_de_meta
+        posicion = (Vehiculo.distancia_recorrida * len_pista) // distancia_de_meta
         posicion = min(len_pista, posicion)
         pista = pista[:posicion] + "*" + pista[posicion:]
         pistas += '\n{:2d} '.format(x) + pista
