@@ -11,7 +11,7 @@ class Vehiculo:
     tam_tanque = 2  # Tamaño del tanque de gasolina
     min_distancia = 2  # Cantidad máxima de metros que puede avanzar un carro en una iteración
     max_distancia = 2  # Cantidad mínima de metros que puede avanzar un carro en una iteración
-    distancia_recorrida = 2  # Distancia recorrida por el vehículo
+    distancia_recorrida = 4  # Distancia recorrida por el vehículo
 
     def __init__(self):
         """Inicializa la clase padre del vehículo"""
@@ -33,7 +33,7 @@ def imprime_carrera():
     pistas = ""
     for x in range(len(participantes)):  # Itera sobre los vehículos
         vehiculo = participantes[x]
-        pista = "-" * len_pista
+        pista = "-"*len_pista
         posicion = (Vehiculo.distancia_recorrida * len_pista) // distancia_de_meta
         posicion = min(len_pista, posicion)
         pista = pista[:posicion] + "*" + pista[posicion:]
@@ -55,8 +55,8 @@ def menu():
     Función que limpia la pantalla y muestra nuevamente el menu
 
     """
-    os.system('clear')  # NOTA para windows tienes que cambiar clear por cls
-    # clear_output(wait = True)
+    #os.system('clear')  # NOTA para windows tienes que cambiar clear por cls
+    clear_output()
     print("      (---PARTICIPANTES---)")
     print("\t")
     print("\t1 - Moto de agua")
@@ -73,34 +73,40 @@ def entrada_menu():
     # Mostramos el menu
     menu()
     # solicituamos una opción al usuario
+
     opcionMenu = input("elegir vehiculo >> ")
 
-    if (opcionMenu == "1"):
-        print(" ")
-        input("Moto de agua\npulsa una tecla para continuar")
+    while (opcionMenu != -1):
 
-    elif opcionMenu == "2":
-        print("")
-        input("Monorriel\npulsa una tecla para continuar")
+        if (opcionMenu == "1"):
+            print(" ")
+            input("Moto de agua\npulsa una tecla para continuar")
 
-    elif opcionMenu == "3":
-        print("")
-        input("Trailer\npulsa una tecla para continuar")
+        elif opcionMenu == "2":
+            print("")
+            input("Monorriel\npulsa una tecla para continuar")
 
-    elif opcionMenu == "4":
-        print("")
-        input("Patines\npulsa una tecla para continuar")
+        elif opcionMenu == "3":
+            print("")
+            input("Trailer\npulsa una tecla para continuar")
 
-    elif opcionMenu == "5":
-        print("")
-        input("Helicoptero\npulsa una tecla para continuar")
+        elif opcionMenu == "4":
+            print("")
+            input("Patines\npulsa una tecla para continuar")
 
-    elif opcionMenu == "9":
-        quit()
+        elif opcionMenu == "5":
+            print("")
+            input("Helicoptero\npulsa una tecla para continuar")
 
-    else:
-        print("")
-        input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
+        elif opcionMenu == "9":
+            quit()
+
+        else:
+            print("")
+            input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
+
+        #os.system('clear')
+        clear_output()
 
 def inicializa_participantes():
     """Le pregunta al usuario la cantidad y tipos de participantes
@@ -113,7 +119,7 @@ def main():
     print("Juego comenzado.")
     # Aquí va su código
     while not juego_terminado():
-        time.sleep(1)  # Se encarga de dormir el programa un segundo
+        time.sleep(5)  # Se encarga de dormir el programa un segundo
     print("Juego terminado.")
 
 
@@ -138,6 +144,8 @@ class Patines(Vehiculo):
 
 class Helicoptero(Vehiculo):
     pass
+
+movil = Monorriel()
 
 '''random.random()'''
 inicializa_participantes()
