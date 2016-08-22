@@ -1,15 +1,18 @@
+from IPython.display import clear_output  # Se necesita para limpiar la salida del notebook
+
+
 def actualizar(puntos):
 	global pun_tot,pun_gra
 
 	pun_tot += puntos
 
-	erase(pun_gra)
-	pun_gra = create_text(500,500,pun_tot,16,"CENTER")
+	clear_output()
+	pun_gra = print(pun_tot)
 
 	return
 
 pun_tot = 0
-pun_gra = create_text(500,500,pun_tot,16,"CENTER")
+pun_gra = print(pun_tot)
 
 puntos = int(input("Puntos : "))
 while puntos != -1:
