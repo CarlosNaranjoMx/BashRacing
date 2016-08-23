@@ -3,7 +3,7 @@ import time  # Se necesita para dormir el programa
 import random  # Se necesita para obtener la distancia aleatoria a avanzar
 import os
 
-participantes = ["Moto_de_agua","Monorriel"]  # Lista de los participantes de la carrera
+participantes = []  # Lista de los participantes de la carrera
 distancia_de_meta = 10  # Tamaño de la pista de carreras en metros
 
 
@@ -26,6 +26,30 @@ class Vehiculo:
         Si el vehículo ha llegado a la meta este ya no avanza.
         """
         pass
+
+class Moto_de_agua(Vehiculo):
+
+    self.min_distancia = 1
+    self.max_distancia = 4
+    self.distancia_recorrida = 7
+
+
+class Monorriel(Vehiculo):
+    pass
+
+
+class Trailer(Vehiculo):
+    pass
+
+
+class Patines(Vehiculo):
+    pass
+
+
+class Helicoptero(Vehiculo):
+    pass
+
+movil = Monorriel()
 
 def imprime_carrera():
     """Imprime el estado de la carrera"""
@@ -74,6 +98,8 @@ def entrada_menu():
     menu()
     # solicituamos una opción al usuario
 
+    global participantes
+
     opcionMenu = input("elegir vehiculo >> ")
 
     while (opcionMenu != -1):
@@ -81,6 +107,8 @@ def entrada_menu():
         if (opcionMenu == "1"):
             print(" ")
             input("Moto de agua\npulsa una tecla para continuar")
+            moto = Moto_de_agua()
+            participantes.append(Moto_de_agua())
 
         elif opcionMenu == "2":
             print("")
@@ -123,29 +151,7 @@ def main():
     print("Juego terminado.")
 
 
-class Moto_de_agua(Vehiculo):
-    """
-    self.tam_tanque = 3
-    self.min_distancia = 1
-    self.max_distancia = 4
-    """
 
-class Monorriel(Vehiculo):
-    pass
-
-
-class Trailer(Vehiculo):
-    pass
-
-
-class Patines(Vehiculo):
-    pass
-
-
-class Helicoptero(Vehiculo):
-    pass
-
-movil = Monorriel()
 
 '''random.random()'''
 inicializa_participantes()

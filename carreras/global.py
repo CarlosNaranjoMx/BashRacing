@@ -1,6 +1,5 @@
 from IPython.display import clear_output  # Se necesita para limpiar la salida del notebook
 
-
 def actualizar(puntos):
 	global pun_tot,pun_gra
 
