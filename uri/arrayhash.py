@@ -19,9 +19,7 @@ def arrhash():
         l = int(input())
         total = 0
         for j in range(l):
-            m = input()
-            for o in range(len(m)):
-                arrayhash.append(m[o])
+            arrayhash = input()
         for k in range(len(arrayhash)):
             total += int(d.get(arrayhash[k])) + j + k 
         print(total)
