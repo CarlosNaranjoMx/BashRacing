@@ -4,28 +4,29 @@ import random  # Se necesita para obtener la distancia aleatoria a avanzar
 import os
 
 
-'''
-moto = Moto_de_agua()
-mono = Monorriel()
-'''
-
-
 participantes = []  # Lista de los participantes de la carrera
 distancia_de_meta = 10  # Tamaño de la pista de carreras en metros
 no_participantes = 0
+posicion = 0
 
 #CLASE VEHICULO (1)
 
 class Vehiculo:
-    
+    '''
     tam_tanque = 2  # Tamaño del tanque de gasolina
     min_distancia = 2  # Cantidad máxima de metros que puede avanzar un carro en una iteración
     max_distancia = 2  # Cantidad mínima de metros que puede avanzar un carro en una iteración
     distancia_recorrida = 0  # Distancia recorrida por el vehículo
-    
+    '''
     def __init__(self):
         """Inicializa la clase padre del vehículo"""
+        self.tanque = 2
+        self.tam_tanque = 3
+        self.min_distancia = 3
+        self.max_distancia = 5
+        self.distancia_recorrida = 0
         self.tanque = self.tam_tanque  # Llena el tanque del vehículo
+
         
     def avanzar(self):
         """
@@ -35,44 +36,48 @@ class Vehiculo:
         entonces el vehículo no avanza pero rellena su tanque.
         Si el vehículo ha llegado a la meta este ya no avanza.
         """
-        self.tam_tanque -= 1
+        self.tanque -= 1
         self.distancia_recorrida = self.distancia_recorrida + random.randint(self.min_distancia,self.max_distancia)
-
 
 #PARTICIPANTES DE LA CARRERA (2)
 
 
 class Moto_de_agua(Vehiculo):
+    tanque = 0
     def _init_(self):
         super._init_()
+        self.tanque = 2
         self.tam_tanque = 3
-        self.min_distancia = 3
-        self.max_distancia = 5
+        self.min_distancia = 0
+        self.max_distancia = 1
         self.distancia_recorrida = 0
   
 class Monorriel(Vehiculo):
     def _init_(self):
         super._init_()
+        self.tanque = 1
         self.tam_tanque = 5
-        self.min_distancia = 1
-        self.max_distancia = 3
+        self.min_distancia = 0
+        self.max_distancia = 2
         self.distancia_recorrida = 0
 
 
 class Trailer(Vehiculo):
     def _init_(self):
         super._init_()
+        self.tanque = 2
         self.tam_tanque = 2
-        self.min_distancia = 8
-        self.max_distancia = 3
+        self.min_distancia = 0
+        self.max_distancia = 1
         self.distancia_recorrida = 0
 
 
 class Patines(Vehiculo):
     def _init_(self):
         super._init_()
+        self.tanque = 1
         self.tam_tanque = 2
-        self.min_distancia = 5
+        self.min_distancia = 2
         self.max_distancia = 3
         self.distancia_recorrida = 0
 
@@ -80,6 +85,7 @@ class Patines(Vehiculo):
 class Helicoptero(Vehiculo):
     def _init_(self):
         super._init_()
+        self.tanque = 2
         self.tam_tanque = 2
         self.min_distancia = 1
         self.max_distancia = 3
@@ -98,8 +104,9 @@ helicoptero = Helicoptero()
 
 def imprime_carrera():
     """Imprime el estado de la carrera"""
-    len_pista = 60  # Longitud en ascii del circuito de carreras
+    len_pista = 60 # Longitud en ascii del circuito de carreras
     pistas = ""
+    global posicion
     for x in range(len(participantes)):  # Itera sobre los vehículos
         vehiculo = participantes[x]
         pista = "-" * len_pista
@@ -109,7 +116,6 @@ def imprime_carrera():
         pistas += '\n{:2d} '.format(x) + pista
     clear_output(wait=True)
     print(pistas)
-    print("wwwwwwwww")
 
 #AVANZA CARRERA (4)
 
@@ -125,7 +131,13 @@ def avanza_carrera():
 
 def juego_terminado():
     """Indica si en el estado actual de la carrera hay al menos un ganador"""
-    return True
+    global posicion
+    if (posicion < 60):
+        return True 
+
+    else:
+        return False
+
 
 
 #MI MENU (5)
@@ -135,8 +147,8 @@ def menu():
     """
     Función que limpia la pantalla y muestra nuevamente el menu
     """
-    os.system('clear')  # NOTA para windows tienes que cambiar clear por cls
-    # clear_output(wait = True)
+    #os.system('clear') 
+    clear_output(wait = True)
     print("      (---PARTICIPANTES---)")
     print("\t")
     print("\t1 - Moto de agua")
@@ -196,26 +208,17 @@ def inicializa_participantes():
 
 
 def main():
+    global posicion
     print("Juego comenzado.")
     # Aquí va su código
-    while not juego_terminado():
-        time.sleep(1)  # Se encarga de dormir el programa un segundo
+    inicializa_participantes()
+    while juego_terminado():
+        clear_output(True)
+        os.system("clear")
+        imprime_carrera()
+        avanza_carrera()
+        time.sleep(2)  # Se encarga de dormir el programa un segundo
+
     print("Juego terminado.")
 
-
-
-'''random.random()'''
-inicializa_participantes()
-while juego_terminado():
-    clear_output(True)
-    os.system("clear")
-    imprime_carrera()
-    avanza_carrera()
-    time.sleep(1)
-
-
-'''
-while(juego_terminado):
-    imprime_carrera()
-    avanza_carrera
-'''
+main()
